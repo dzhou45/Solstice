@@ -5,8 +5,14 @@ const port = process.env.PORT || 9000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/api/hello', (req, res) => {
-    res.send({ express: 'Hello From Express' });
+const costumers = require('C:\\Users\\David\\OneDrive - Northeastern University\\PC\\Documents\\JS\\solstice\\customers.json')
+app.get('/customers', (req, res) => {
+    res.json({ express: JSON.stringify(costumers) });
+});
+
+const accounts = require('C:\\Users\\David\\OneDrive - Northeastern University\\PC\\Documents\\JS\\solstice\\accounts.json')
+app.get('/accounts', (req, res) => {
+    res.send({ express: JSON.stringify(accounts) });
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
