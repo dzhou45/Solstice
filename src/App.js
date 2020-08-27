@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import './customers.css';
-import DenseTable from './customerTable';
+import './App.css';
+import CustomerTable from './customerTable';
+import AccountTable from './accountTable'
 
-class Customers extends Component {
+class App extends Component {
 
   state = {
     customers: '',
@@ -19,9 +20,9 @@ class Customers extends Component {
       .catch(err => console.log(err));
   }
 
-  _showMessage = (bool) => {
+  _showCustomers = (bool) => {
     this.setState({
-      showMessage: bool
+      showCustomers: bool
     });
   }
 
@@ -47,14 +48,28 @@ class Customers extends Component {
     else {
       customers = JSON.parse(this.state.customers)
     }
+    let accounts = '';
+    if (this.state.accounts === '') {
+      accounts = this.state.accounts;
+    }
+    else {
+      accounts = JSON.parse(this.state.accounts)
+    }
     return (
       <div className="App">
-        <header className="App-header">
-          <DenseTable rows={(customers)} />
-        </header>
+        {this.state.showCustomers && <header className="App-header">
+          Customers
+        </header>}
+        {!this.state.showCustomers && <header className="App-header">
+          Accounts
+        </header>}
+        <button onClick={this._showCustomers.bind(null, true)}>Show Customers</button>
+        <button onClick={this._showCustomers.bind(null, false)}>Show Accounts</button>
+        {this.state.showCustomers && <CustomerTable rows={(customers)} accounts={(accounts)} />}
+        {!this.state.showCustomers && <AccountTable rows={(accounts)} />}
       </div>
     );
   }
 }
 
-export default Customers;
+export default App;
