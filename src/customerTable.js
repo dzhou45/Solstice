@@ -65,6 +65,7 @@ function Row(props) {
                                         <TableCell>{row.active}</TableCell>
                                         <TableCell>{row.account_manager_id}</TableCell>
                                         <TableCell>{row.reason_for_joining}</TableCell>
+                                        <TableCell>{row.created_date}</TableCell>
                                         <TableCell></TableCell>
                                     </TableRow>
                                 </TableBody>
